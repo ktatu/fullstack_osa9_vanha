@@ -10,19 +10,17 @@ const getPatientDataNoSsn = (): PatientNoSsn[] => {
         dateOfBirth,
         gender,
         occupation
-    }))
-}
+    }));
+};
 
 const addPatient = (newPatient: NewPatient): Patient => {
-    const patient = { id: uuid(), ...newPatient }
-    console.log("newPatient ", newPatient)
-    console.log("patient ", patient)
-    patientData.push(patient)
+    const patient = { id: uuid(), ...newPatient };
+    patientData.push(patient);
 
-    return patient
-}
+    return patient;
+};
 
 export default {
     getPatientDataNoSsn,
     addPatient
-}
+};

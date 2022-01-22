@@ -6,10 +6,13 @@ const router = express.Router();
 
 router.get('/', (_req, res) => {
     res.status(200).json(patientService.getPatientDataNoSsn());
-})
+});
 
 router.post('/', (req, res) => {
     try {
+        // I think this lint error is happening because my package versions are newer than what the material was made on
+        // so I'll just disable these, they aren't mentioned in the material
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         const newPatient = toNewPatient(req.body);
         const addedPatient = patientService.addPatient(newPatient);
 
@@ -22,7 +25,7 @@ router.post('/', (req, res) => {
 
         res.status(400).send(errorMsg);
     }
-})
+});
 
 export default router;
 
