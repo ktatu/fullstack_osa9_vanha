@@ -13,6 +13,14 @@ export interface Patient {
     occupation: string;
 }
 
+export type PatientFields = { name: unknown, dateOfBirth: unknown, ssn: unknown, gender: unknown, occupation: unknown };
+
 export type NewPatient = Omit<Patient, 'id'>;
 
 export type PatientNoSsn = Omit<Patient, 'ssn'>;
+
+export enum Gender {
+    Male = 'male',
+    Female = 'female',
+    Other = 'other'
+}
