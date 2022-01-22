@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "dev": "ts-node-dev src/index.ts",
-    "lint": "eslint --ext .ts",
+    "lint": "eslint --ext .ts .",
     "start": "node build/index.js"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
+    "@types/node": "^17.0.10",
     "@types/uuid": "^8.3.4",
     "cors": "^2.8.5",
     "express": "^4.17.2",

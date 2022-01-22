@@ -7,10 +7,10 @@ const toNewPatient = ({ name, dateOfBirth, ssn, gender, occupation } : PatientFi
         ssn: parseSsn(ssn),
         occupation: parseOccupation(occupation),
         gender: parseGender(gender)
-    }
+    };
 
     return newPatient;
-}
+};
 
 const parseName = (name: unknown): string => {
     if (!name || !isString(name)) {
@@ -18,7 +18,7 @@ const parseName = (name: unknown): string => {
     }
 
     return name;
-}
+};
 
 const parseDateOfBirth = (date: unknown): string => {
     if (!date || !isString(date) || !isDate(date)) {
@@ -26,7 +26,7 @@ const parseDateOfBirth = (date: unknown): string => {
     }
 
     return date;
-}
+};
 
 const parseSsn = (ssn: unknown): string => {
     if (!ssn || !isString(ssn)) {
@@ -34,7 +34,7 @@ const parseSsn = (ssn: unknown): string => {
     }
 
     return ssn;
-}
+};
 
 const parseOccupation = (occupation: unknown): string => {
     if (!occupation || !isString(occupation)) {
@@ -42,7 +42,7 @@ const parseOccupation = (occupation: unknown): string => {
     }
 
     return occupation;
-}
+};
 
 const parseGender = (gender: unknown): Gender => {
     if (!gender || !isGender(gender)) {
@@ -50,18 +50,20 @@ const parseGender = (gender: unknown): Gender => {
     }
 
     return gender;
-}
+};
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isGender = (param: any): param is Gender => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return Object.values(Gender).includes(param);
-}
+};
 
 const isString = (text: unknown): text is string => {
     return typeof(text) === 'string' || text instanceof String;
-}
+};
 
 const isDate = (date: string): boolean => {
     return Boolean(Date.parse(date));
-}
+};
 
 export default toNewPatient;
