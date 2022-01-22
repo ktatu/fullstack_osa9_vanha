@@ -15,11 +15,9 @@ const getPatientDataNoSsn = (): PatientNoSsn[] => {
 
 const addPatient = (newPatient: NewPatient): Patient => {
     const patient = { id: uuid(), ...newPatient }
-    console.log("newPatient ", newPatient)
-    console.log("patient ", patient)
-    patientData.push(patient)
+    patientData.push(patient);
 
-    return patient
+    return patient;
 }
 
 export default {
