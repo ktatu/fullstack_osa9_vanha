@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Patient } from "../types";
+import { Entry, Patient } from "../types";
 import { useParams } from "react-router-dom";
 
 import { addPatient, useStateValue } from "../state";
@@ -13,9 +13,10 @@ const PatientInfoPage = () => {
     const { id } = useParams<{ id: string }>();
 
     React.useEffect(() => {
+        console.log("---");
         const patientFromState = Object.values(patients).find((patient: Patient) => patient.id === id);
 
-        if (patientFromState) {
+        if (patientFromState?.entries) {
             setPatient(patientFromState);
             return;
         }
@@ -42,6 +43,17 @@ const PatientInfoPage = () => {
                 <br />
                 occupation: {patient?.occupation}
             </p>
+            <h4>Entries</h4>
+            {patient?.entries?.map((entry: Entry) => (
+                <div key={entry.id}>
+                    <p>{entry.date} {entry.description}</p>
+                    <ul>
+                        {entry.diagnosisCodes?.map((code : string) => (
+                            <li key={code}>{code}</li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
         </div>
     );
 };

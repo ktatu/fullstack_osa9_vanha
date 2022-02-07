@@ -41,12 +41,12 @@ export interface Patient {
 export type SickLeave = {
     startDate: string;
     endDate: string;
-}
+};
 
 export type Discharge = {
     date: string;
     criteria: string;
-}
+};
 
 export type PatientFields = { name: unknown, dateOfBirth: unknown, ssn: unknown, gender: unknown, occupation: unknown };
 
@@ -60,11 +60,11 @@ export enum Gender {
     Male = 'male',
     Female = 'female',
     Other = 'other'
-}
+};
 
 export enum HealthCheckRating {
     "Healthy",
     "LowRisk",
     "HighRisk",
     "CriticalRisk"
-}
+};
