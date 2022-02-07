@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Entry, Patient } from "../types";
+import { Diagnosis, Entry, Patient } from "../types";
 import { useParams } from "react-router-dom";
 
 import { addPatient, useStateValue } from "../state";
@@ -11,9 +11,9 @@ const PatientInfoPage = () => {
     const [{ patients }, dispatch] = useStateValue();
     const [patient, setPatient] = useState<Patient | undefined>();
     const { id } = useParams<{ id: string }>();
+    const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
     React.useEffect(() => {
-        console.log("---");
         const patientFromState = Object.values(patients).find((patient: Patient) => patient.id === id);
 
         if (patientFromState?.entries) {
@@ -35,6 +35,18 @@ const PatientInfoPage = () => {
         void fetchPatient(id);
     }, [id]);
 
+    React.useEffect(() => {
+        const fetchDiagnoses = async () => {
+            try {
+                const { data: diagnosesFromApi } = await axios.get<Diagnosis[]>(`${apiBaseUrl}/diagnoses`);
+                setDiagnoses(diagnosesFromApi);
+            } catch (e) {
+                console.error(e);
+            } 
+        };
+        void fetchDiagnoses();
+    }, [patient]);
+
     return (
         <div>
             <h3>{patient?.name} ({patient?.gender})</h3>
@@ -49,7 +61,7 @@ const PatientInfoPage = () => {
                     <p>{entry.date} {entry.description}</p>
                     <ul>
                         {entry.diagnosisCodes?.map((code : string) => (
-                            <li key={code}>{code}</li>
+                            <li key={code}>{code} {diagnoses.find((diagnosis: Diagnosis) => (diagnosis.code === code))?.name}</li>
                         ))}
                     </ul>
                 </div>
