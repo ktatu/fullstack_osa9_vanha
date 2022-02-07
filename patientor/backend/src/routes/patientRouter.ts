@@ -14,6 +14,7 @@ router.get('/:id', (req, res) => {
 
     console.log("patient id ", patientId)
     if (patient) {
+        console.log("patient ", patient)
         res.json(patient);
     } else {
         res.sendStatus(404);
