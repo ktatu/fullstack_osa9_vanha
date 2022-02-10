@@ -7,6 +7,8 @@ import { addPatient, useStateValue } from "../state";
 
 import { apiBaseUrl } from "../constants";
 
+import EntrySegment from "./EntrySegment";
+
 const PatientInfoPage = () => {
     const [{ patients }, dispatch] = useStateValue();
     const [patient, setPatient] = useState<Patient | undefined>();
@@ -20,6 +22,7 @@ const PatientInfoPage = () => {
             setPatient(patientFromState);
             return;
         }
+        console.log(diagnoses);
 
         const fetchPatient = async (patientId: string) => {
             try {
@@ -57,6 +60,16 @@ const PatientInfoPage = () => {
             </p>
             <h4>Entries</h4>
             {patient?.entries?.map((entry: Entry) => (
+                <EntrySegment key={entry.id} entry={entry} diagnoses={diagnoses} />
+            ))}
+        </div>
+    );
+};
+
+export default PatientInfoPage;
+
+/*
+            {patient?.entries?.map((entry: Entry) => (
                 <div key={entry.id}>
                     <p>{entry.date} {entry.description}</p>
                     <ul>
@@ -66,8 +79,4 @@ const PatientInfoPage = () => {
                     </ul>
                 </div>
             ))}
-        </div>
-    );
-};
-
-export default PatientInfoPage;
+*/

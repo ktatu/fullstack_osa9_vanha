@@ -54,6 +54,8 @@ export type Discharge = {
   criteria: string;
 };
 
+export type EntryType = "Hospital" | "HealthCheck" | "OccupationalHealthCare";
+
 export type Entry = OccupationalHealthcareEntry | HospitalEntry | HealthCheckEntry;
 
 export enum HealthCheckRating {
